@@ -25,8 +25,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
+      data-theme="dark"
     >
-      <body className={`min-h-full flex flex-col ${oswald.variable} ${inter.variable}`}>
+      <body className={`min-h-full flex flex-col ${oswald.variable} ${inter.variable} bg-black`}>
 
         <Navbar></Navbar>
 

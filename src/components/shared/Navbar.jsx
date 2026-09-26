@@ -1,10 +1,18 @@
 import Image from 'next/image';
 import React from 'react';
 import Logo from '@/assets/logo.png'
+import Link from 'next/link';
 
 const Navbar = () => {
+
+    const links = <>
+        <li className='font-[inter]'><Link href="/">Workouts</Link></li>
+
+        <li className='font-[inter]'><Link href="my-plan">My Plan</Link></li>
+    </>
+
     return (
-        <nav className=' bg-black'>
+        <nav className=' bg-black sticky top-0 z-50'>
             <div className="navbar container mx-auto shadow-sm">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -14,33 +22,29 @@ const Navbar = () => {
                         <ul
                             tabIndex={-1}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li className='font-[inter]'><a>Workouts</a></li>
-                            
-                            <li className='font-[inter]'><a>My Plan</a></li>
+                            {links}
                         </ul>
                     </div>
                     <div className='flex gap-1 text-xl font-bold items-center'>
-                        <Image 
-                        src={Logo}
-                        alt='Logo'
-                        height={28}
-                        width={28}
+                        <Image
+                            src={Logo}
+                            alt='Logo'
+                            height={28}
+                            width={28}
                         ></Image>
                         <h4 className='font-[oswald]'>FITLOG</h4>
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li className='font-[inter]'><a>Workouts</a></li>
-                        
-                        <li className='font-[inter]'><a>My Plan</a></li>
+                        {links}
                     </ul>
                 </div>
                 <div className="navbar-end gap-4">
                     <a className="btn">Button</a>
                     <a className="btn">Button</a>
                 </div>
-                
+
             </div>
         </nav>
     );

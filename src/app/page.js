@@ -1,11 +1,13 @@
 import Banner from '@/components/homepage/Banner';
-import Navbar from '@/components/shared/Navbar';
+import FitnessLibrary from '@/components/homepage/Library';
 import React from 'react';
+
 
 const page = () => {
   return (
     <div>
       <Banner></Banner>
+      <FitnessLibrary></FitnessLibrary>
     </div>
   );
 };
