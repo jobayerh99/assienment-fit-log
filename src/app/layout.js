@@ -1,10 +1,18 @@
-import { Oswald } from "next/font/google";
+import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
+import Navbar from "@/components/shared/Navbar";
 
 const oswald = Oswald({
   weight: ["700"],
   subsets: ["latin"],
+  variable: "--font-oswald",
+});
+
+const inter = Inter({
+  weight: ["700"],
+  subsets: ["latin"],
+  variable: "--font-inter",
 });
 
 
@@ -17,9 +25,10 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-
     >
-      <body className={`min-h-full flex flex-col ${oswald.className}`}>
+      <body className={`min-h-full flex flex-col ${oswald.variable} ${inter.variable}`}>
+
+        <Navbar></Navbar>
 
         {children}
         <ToastContainer />
