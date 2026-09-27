@@ -1,6 +1,7 @@
 import React from "react";
 import BannerImg from "@/assets/banner.png";
 import Image from "next/image";
+import Link from "next/link";
 
 const Banner = () => {
     return (
@@ -25,9 +26,11 @@ const Banner = () => {
                     into today&apos;s plan, and watch the week&apos;s work add up.
                 </p>
 
-                <button className="btn uppercase font-[inter] font-bold text-sm text-black bg-[#C2F800] hover:bg-white hover:text-black">
-                    Browse workouts
-                </button>
+                <a href="#card-id">
+                    <button className="btn uppercase font-[inter] font-bold text-sm text-black bg-[#C2F800] hover:bg-white hover:text-black">
+                        Browse workouts
+                    </button>
+                </a>
             </div>
 
             {/* Image Section */}

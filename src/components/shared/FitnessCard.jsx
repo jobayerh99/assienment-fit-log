@@ -11,7 +11,7 @@ const FitnessCard = ({ fitness }) => {
             href={`/workout/${fitness.id}`}
             className="group block h-full min-w-0"
         >
-            <article className="flex h-full flex-col overflow-hidden rounded-xl border border-[#292D38] bg-[#15171D] transition-all duration-300 hover:-translate-y-1 hover:border-[#C2F800]/50 hover:shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
+            <article id="card-id" className="scroll-mt-20 flex h-full flex-col overflow-hidden rounded-xl border border-[#292D38] bg-[#15171D] transition-all duration-300 hover:-translate-y-1 hover:border-[#C2F800]/50 hover:shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
 
                 {/* Workout Image */}
                 <div className="relative aspect-[2/1] w-full overflow-hidden bg-[#20242E]">

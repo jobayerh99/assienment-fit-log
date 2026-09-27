@@ -2,6 +2,7 @@ import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import Navbar from "@/components/shared/Navbar";
+import FitnessProvider from "@/context/FitnessContext";
 
 const oswald = Oswald({
   weight: ["700"],
@@ -29,10 +30,14 @@ export default function RootLayout({ children }) {
     >
       <body className={`min-h-full flex flex-col ${oswald.variable} ${inter.variable} bg-black`}>
 
-        <Navbar></Navbar>
+        <FitnessProvider>
 
-        {children}
-        <ToastContainer />
+          <Navbar></Navbar>
+          {children}
+          <ToastContainer />
+          
+        </FitnessProvider>
+
       </body>
     </html>
   );

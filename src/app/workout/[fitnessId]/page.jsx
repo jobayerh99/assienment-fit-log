@@ -1,3 +1,5 @@
+import PlanButton from '@/components/fitness-details/PlanButton';
+import SavedWorkoutButton from '@/components/fitness-details/SavedWorkoutButton';
 import Image from 'next/image';
 import React from 'react';
 import { IoIosBookmark } from 'react-icons/io';
@@ -44,14 +46,16 @@ const FitnessDetails = async ({ params }) => {
 
                     <div className="relative h-full min-h-[400px] overflow-hidden rounded-3xl bg-[#161B26] shadow-lg lg:min-h-0">
 
-                        <Image
-                            src={fitnessData.image}
-                            alt={fitnessData.name || 'Workout Image'}
-                            fill
-                            priority
-                            sizes="(max-width: 1023px) 100vw, 50vw"
-                            className="object-cover transition-transform duration-500 hover:scale-105"
-                        />
+                        {fitnessData.image && (
+                            <Image
+                                src={fitnessData.image}
+                                alt={fitnessData.name || 'Workout Image'}
+                                fill
+                                priority
+                                sizes="(max-width: 1023px) 100vw, 50vw"
+                                className="object-cover transition-transform duration-500 hover:scale-105"
+                            />
+                        )}
 
                     </div>
 
@@ -134,25 +138,9 @@ const FitnessDetails = async ({ params }) => {
                         {/* Action Buttons */}
                         <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:gap-4">
 
-                            <button className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl bg-[#C2F800] px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-black shadow-md transition-all duration-300 hover:scale-[1.02] hover:bg-[#D4FF24] sm:text-sm">
+                            <PlanButton fitnessData={fitnessData}></PlanButton>
 
-                                <MdOutlineToday className="shrink-0 text-xl" />
-
-                                <span>
-                                    Add to today&apos;s plan
-                                </span>
-
-                            </button>
-
-                            <button className="inline-flex min-h-12 flex-1 items-center justify-center gap-2 rounded-xl border border-[#2D333F] bg-transparent px-4 py-3.5 text-xs font-bold uppercase tracking-wider text-white shadow-md transition-all duration-300 hover:scale-[1.02] hover:bg-[#1A1F2C] sm:text-sm">
-
-                                <IoIosBookmark className="shrink-0 text-xl" />
-
-                                <span>
-                                    Save for later
-                                </span>
-
-                            </button>
+                            <SavedWorkoutButton fitnessData={fitnessData}></SavedWorkoutButton>
 
                         </div>
 

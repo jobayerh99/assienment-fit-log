@@ -20,7 +20,7 @@ const FitnessLibrary = async () => {
 
     const fitnessData = await getFitnessData();
 
-    console.log(fitnessData);
+    
     return (
         <section className='container mx-auto py-10'>
             {/* text section */}

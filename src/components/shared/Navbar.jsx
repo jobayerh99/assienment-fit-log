@@ -1,14 +1,22 @@
+"use client"
 import Image from 'next/image';
-import React from 'react';
+import React, { useContext } from 'react';
 import Logo from '@/assets/logo.png'
 import Link from 'next/link';
+import { FitnessContext } from '@/context/FitnessContext';
+import NavbarPlanButton from '../fitness-details/NavbarPlanButton';
+import NavSavedButton from '../fitness-details/NavSavedButton';
+import { usePathname } from 'next/navigation';
 
 const Navbar = () => {
 
-    const links = <>
-        <li className='font-[inter]'><Link href="/">Workouts</Link></li>
+    const pathname = usePathname();
 
-        <li className='font-[inter]'><Link href="my-plan">My Plan</Link></li>
+
+    const links = <>
+        <li className='font-[inter]'><Link className={pathname === '/' ? 'text-[#C2F800]' : ''} href="/">Workouts</Link></li>
+
+        <li className='font-[inter]'><Link className={pathname === '/my-plan' ? 'text-[#C2F800]' : ''} href="/my-plan">My Plan</Link></li>
     </>
 
     return (
@@ -25,15 +33,17 @@ const Navbar = () => {
                             {links}
                         </ul>
                     </div>
-                    <div className='flex gap-1 text-xl font-bold items-center'>
-                        <Image
-                            src={Logo}
-                            alt='Logo'
-                            height={28}
-                            width={28}
-                        ></Image>
-                        <h4 className='font-[oswald]'>FITLOG</h4>
-                    </div>
+                    <Link href="/">
+                        <div className='flex gap-1 text-xl font-bold items-center'>
+                            <Image
+                                src={Logo}
+                                alt='Logo'
+                                height={28}
+                                width={28}
+                            ></Image>
+                            <h4 className='font-[oswald]'>FITLOG</h4>
+                        </div>
+                    </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -41,8 +51,8 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end gap-4">
-                    <a className="btn">Button</a>
-                    <a className="btn">Button</a>
+                    <NavbarPlanButton></NavbarPlanButton>
+                    <NavSavedButton></NavSavedButton>
                 </div>
 
             </div>
