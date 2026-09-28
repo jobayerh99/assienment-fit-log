@@ -27,7 +27,7 @@ const Banner = () => {
                 </p>
 
                 <a href="#card-id">
-                    <button className="btn uppercase font-[inter] font-bold text-sm text-black bg-[#C2F800] hover:bg-white hover:text-black">
+                    <button className="btn uppercase font-[inter] font-bold text-sm text-black bg-[#C2F800] ">
                         Browse workouts
                     </button>
                 </a>

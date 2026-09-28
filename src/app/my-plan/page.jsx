@@ -15,58 +15,46 @@ const MyPlan = () => {
     const activeTab = selectedTab ?? initialTab;
 
     return (
-        <div className="p-6">
-            <h1 className="text-2xl font-bold mb-4">My Plan</h1>
-
-            {/* Tab buttons */}
-            <div className="flex gap-4 mb-6">
-                <button
-                    className={`px-4 py-2 rounded ${activeTab === "plan" ? "bg-blue-500 text-white" : "bg-gray-200"
-                        }`}
-                    onClick={() => setSelectedTab("plan")}
-                >
-                    Plan
-                </button>
-                <button
-                    className={`px-4 py-2 rounded ${activeTab === "saved" ? "bg-blue-500 text-white" : "bg-gray-200"
-                        }`}
-                    onClick={() => setSelectedTab("saved")}
-                >
-                    Saved
-                </button>
+        <section>
+            <div className="container mx-auto p-4 mt-5">
+                <h2 className="uppercase font-[oswad] font-bold text-3xl text-white">my plan</h2>
+                <p className=" font-[inter] text-[#8A92A0]">Cap of five lifts for today. Finish them, then load more.</p>
+            </div>
+            <div className="container mx-auto p-4 flex justify-between bg-[#232732] rounded-3xl items-center text-center mb-6">
+                <div>
+                    <p className=" font-[inter] text-[#8A92A0]">Exercise</p>
+                    <span className="uppercase font-[oswad] font-bold text-3xl text-white">{todaysPlan.length}</span>
+                </div>
+                <div>
+                    <p className=" font-[inter] text-[#8A92A0]">Minutes</p>
+                    <span className="uppercase font-[oswad] font-bold text-3xl text-white">{todaysPlan.length}</span>
+                </div>
+                <div>
+                    <p className=" font-[inter] text-[#8A92A0]">Calories</p>
+                    <span className="uppercase font-[oswad] font-bold text-3xl text-white">{todaysPlan.length}</span>
+                </div>
             </div>
 
-            {/* Tab content */}
-            <div>
-                {activeTab === "plan" && (
-                    <div>
-                        {todaysPlan.length === 0 ? (
-                            <p>No workouts in your plan yet.</p>
-                        ) : (
-                            todaysPlan.map((workout) => (
-                                <div key={workout.id} className="mb-2 p-2 border rounded bg-white">
-                                    <h2 className="font-semibold text-black">{workout.title}</h2>
-                                </div>
-                            ))
-                        )}
-                    </div>
-                )}
+            {/* name of each tab group should be unique */}
+            <div className="tabs tabs-lift container mx-auto">
+                <input type="radio" 
+                name="my_tabs_3" 
+                className="tab text-[#8A92A0]" 
+                aria-label="Today's Plan"
+                defaultChecked />
 
-                {activeTab === "saved" && (
-                    <div>
-                        {savedWorkout.length === 0 ? (
-                            <p>No workouts saved yet.</p>
-                        ) : (
-                            savedWorkout.map((workout) => (
-                                <div key={workout.id} className="mb-2 p-2 border rounded">
-                                    <h2 className="font-semibold">{workout.title}</h2>
-                                </div>
-                            ))
-                        )}
-                    </div>
-                )}
+                <div className="tab-content bg-base-100 border-base-300 p-6">Tab content 1</div>
+
+                <input type="radio" 
+                name="my_tabs_3" 
+                className="tab text-[#8A92A0]" 
+                aria-label="Saved"
+                 />
+                <div className="tab-content bg-base-100 border-base-300 p-6">Tab content 2</div>
+
+                
             </div>
-        </div>
+        </section>
     );
 };
 
