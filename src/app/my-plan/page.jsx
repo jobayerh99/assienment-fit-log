@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import MyPlanCard from "@/components/shared/MyPlanCard";
 import Link from "next/link";
+import SavedCard from "@/components/shared/SavedCard";
 
 const EmptyState = () => {
     return (
@@ -22,14 +23,21 @@ const EmptyState = () => {
     );
 };
 
-const getMinutes = (item) => {
-    const value = item.time ?? item.duration ?? item.minutes ?? 0;
-    return Number(String(value).replace(/[^\d.]/g, "")) || 0;
-};
+const getMinutes = (item) => Number(item.duration) || 0;
+const getCalories = (item) => Number(item.caloriesBurned) || 0;
 
-const getCalories = (item) => {
-    const value = item.caloriesBurned ?? item.calorie ?? item.cal ?? 0;
-    return Number(String(value).replace(/[^\d.]/g, "")) || 0;
+const sortWorkout = (list, sortBy) => {
+    const sortedWorkouts = [...list];
+
+    if (sortBy === "duration") {
+        sortedWorkouts.sort((a, b) => b.duration - a.duration);
+    } else if (sortBy === "calories") {
+        sortedWorkouts.sort((a, b) => b.caloriesBurned - a.caloriesBurned);
+    } else if (sortBy === "rating") {
+        sortedWorkouts.sort((a, b) => b.rating - a.rating);
+    }
+
+    return sortedWorkouts;
 };
 
 const MyPlan = () => {
@@ -41,7 +49,10 @@ const MyPlan = () => {
     const [selectedTab, setSelectedTab] = useState(null);
     const activeTab = selectedTab ?? initialTab;
 
+    const [sortBy, setSortBy] = useState("duration");
+
     const plans = activeTab === "plan" ? todaysPlan : savedWorkout;
+    const sortedPlans = sortWorkout(plans, sortBy);
 
     const totalExercise = plans.length;
     const totalMinutes = plans.reduce((sum, item) => sum + getMinutes(item), 0);
@@ -49,7 +60,6 @@ const MyPlan = () => {
 
     return (
         <section>
-            {/* Header */}
             <div className="container mx-auto p-4 mt-5">
                 <h2 className="uppercase font-[oswald] font-bold text-3xl text-white">
                     my plan
@@ -59,7 +69,6 @@ const MyPlan = () => {
                 </p>
             </div>
 
-            {/* Stats */}
             <div className="container mx-auto p-4 flex flex-col md:flex-row justify-between bg-[#232732] rounded-3xl items-center text-center mb-6 gap-4">
                 <div>
                     <p className="font-[inter] text-[#8A92A0]">Exercise</p>
@@ -81,7 +90,6 @@ const MyPlan = () => {
                 </div>
             </div>
 
-            {/* Tabs + Sort By + content */}
             <div className="container mx-auto p-4 mb-6">
                 <div className="flex items-center justify-between gap-4">
                     <div className="flex items-center gap-2 flex-wrap">
@@ -89,8 +97,8 @@ const MyPlan = () => {
                             type="button"
                             onClick={() => setSelectedTab("plan")}
                             className={`border rounded-xl px-4 py-2 font-[inter] ${activeTab === "plan"
-                                ? "bg-[#C2F10D] text-black border-transparent"
-                                : "text-[#8A92A0]"
+                                    ? "bg-[#C2F10D] text-black border-transparent"
+                                    : "text-[#8A92A0]"
                                 }`}
                         >
                             Today&apos;s Plan
@@ -99,8 +107,8 @@ const MyPlan = () => {
                             type="button"
                             onClick={() => setSelectedTab("saved")}
                             className={`border rounded-xl px-4 py-2 font-[inter] ${activeTab === "saved"
-                                ? "bg-[#C2F10D] text-black border-transparent"
-                                : "text-[#8A92A0]"
+                                    ? "bg-[#C2F10D] text-black border-transparent"
+                                    : "text-[#8A92A0]"
                                 }`}
                         >
                             Saved
@@ -111,19 +119,27 @@ const MyPlan = () => {
                         <p className="font-[inter] text-[#8A92A0] whitespace-nowrap">
                             Sort By
                         </p>
-                        <select className="select select-bordered select-sm w-auto min-w-[8rem]">
-                            <option>Duration</option>
-                            <option>Calories</option>
-                            <option>Rating</option>
+                        <select
+                            value={sortBy}
+                            onChange={(e) => setSortBy(e.target.value)}
+                            className="select select-bordered select-sm w-auto min-w-32"
+                        >
+                            <option value="duration">Duration</option>
+                            <option value="calories">Calories</option>
+                            <option value="rating">Rating</option>
                         </select>
                     </div>
                 </div>
 
                 <div className="w-full mt-4">
-                    {plans.length > 0 ? (
-                        plans.map((plan) => (
-                            <MyPlanCard key={plan.id} plan={plan} />
-                        ))
+                    {sortedPlans.length > 0 ? (
+                        sortedPlans.map((plan) =>
+                            activeTab === "plan" ? (
+                                <MyPlanCard key={plan.id} plan={plan} />
+                            ) : (
+                                <SavedCard key={plan.id} plan={plan} />
+                            )
+                        )
                     ) : (
                         <EmptyState />
                     )}
