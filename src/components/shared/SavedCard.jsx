@@ -4,6 +4,7 @@ import { IoTimeOutline } from 'react-icons/io5';
 import { FaFire, FaRegStar } from 'react-icons/fa';
 import { MdOutlineDone } from 'react-icons/md';
 import { RxCross2 } from 'react-icons/rx';
+import SavedWorkoutDetailsButton from '../fitness-details/SavedWorkoutDetailsButton';
 
 const SavedCard = ({ plan }) => {
     return (
@@ -56,9 +57,7 @@ const SavedCard = ({ plan }) => {
             {/* Action Buttons */}
             <div className="flex flex-nowrap items-center justify-center lg:justify-between gap-2 sm:gap-3 w-full lg:w-auto rounded-xl p-3 sm:p-4">
 
-                <button className="btn btn-outline border-white/15 text-gray-300 hover:bg-[#C2F800] hover:border-[#C2F800] hover:text-black h-10 min-h-10 px-3 sm:px-4 text-xs sm:text-sm font-semibold normal-case whitespace-nowrap shrink-0 transition-all duration-300">
-                    View Details
-                </button>
+                <SavedWorkoutDetailsButton fitnessId = {plan.id}></SavedWorkoutDetailsButton>
 
                 <button className="btn bg-[#C2F800] border-[#C2F800] text-black hover:bg-[#D4FF24] hover:border-[#D4FF24] h-10 min-h-10 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm font-bold normal-case whitespace-nowrap shrink-0 transition-all duration-300">
                     <MdOutlineDone className="text-lg shrink-0" />

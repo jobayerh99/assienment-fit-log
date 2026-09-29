@@ -2,8 +2,7 @@ import PlanButton from '@/components/fitness-details/PlanButton';
 import SavedWorkoutButton from '@/components/fitness-details/SavedWorkoutButton';
 import Image from 'next/image';
 import React from 'react';
-import { IoIosBookmark } from 'react-icons/io';
-import { MdOutlineToday } from 'react-icons/md';
+
 
 // Data fetching section
 const getFitnessData = async (fitnessId) => {
