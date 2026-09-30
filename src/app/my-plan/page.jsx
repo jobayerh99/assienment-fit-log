@@ -6,6 +6,7 @@ import { useSearchParams } from "next/navigation";
 import MyPlanCard from "@/components/shared/MyPlanCard";
 import Link from "next/link";
 import SavedCard from "@/components/shared/SavedCard";
+import { toast } from "react-toastify";
 
 const EmptyState = () => {
     return (
@@ -41,7 +42,31 @@ const sortWorkout = (list, sortBy) => {
 };
 
 const MyPlan = () => {
-    const { todaysPlan, savedWorkout } = useContext(FitnessContext);
+    const { todaysPlan, savedWorkout, setTodaysPlan, setSavedWorkout } = useContext(FitnessContext);
+ 
+    const handlePlanRemoveWorkout = (id) => {
+        const findWorkout = todaysPlan.find((item) => item.id === id);
+        const updatedList = todaysPlan.filter(item =>item.id !== id)
+        setTodaysPlan(updatedList);
+        if(findWorkout) toast.success(`${findWorkout.name} removed from your list`)
+    } 
+
+    // mark as done button handler
+
+    const handleMarkAsDoneWorkout = (id) => {
+        const findWorkout = todaysPlan.find((item) => item.id === id);
+        const updatedList = todaysPlan.filter(item =>item.id !== id)
+        setTodaysPlan(updatedList);
+        if(findWorkout) toast.success(`${findWorkout.name} is done`)
+    } 
+
+    const handleSaveRemoveWorkout = (id) => {
+        const findWorkout = savedWorkout.find((item) => item.id === id);
+        const updatedList = savedWorkout.filter(item =>item.id !== id)
+        setSavedWorkout(updatedList);
+        if(findWorkout) toast.success(`${findWorkout.name} removed from your list`)
+    } 
+
 
     const searchParams = useSearchParams();
     const initialTab = searchParams.get("tab") || "plan";
@@ -135,9 +160,11 @@ const MyPlan = () => {
                     {sortedPlans.length > 0 ? (
                         sortedPlans.map((plan) =>
                             activeTab === "plan" ? (
-                                <MyPlanCard key={plan.id} plan={plan} />
+                                <MyPlanCard key={plan.id} plan={plan} handlePlanRemoveWorkout= {handlePlanRemoveWorkout}
+                                handleMarkAsDoneWorkout = {handleMarkAsDoneWorkout}
+                                />
                             ) : (
-                                <SavedCard key={plan.id} plan={plan} />
+                                <SavedCard key={plan.id} plan={plan} handleSaveRemoveWorkout = {handleSaveRemoveWorkout} />
                             )
                         )
                     ) : (

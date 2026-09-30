@@ -6,9 +6,9 @@ import { MdOutlineDone } from 'react-icons/md';
 import { RxCross2 } from 'react-icons/rx';
 import SavedWorkoutDetailsButton from '../fitness-details/SavedWorkoutDetailsButton';
 
-const SavedCard = ({ plan }) => {
+const SavedCard = ({ plan, handleSaveRemoveWorkout }) => {
     return (
-        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-4 rounded-2xl bg-[#1C1F26] border border-white/5 shadow-md hover:border-[#C2F800]/20 hover:shadow-lg transition-all duration-300">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 m-2 p-4 rounded-2xl bg-[#1C1F26] border border-white/5 shadow-md hover:border-[#C2F800]/20 hover:shadow-lg transition-all duration-300">
 
             {/* Image + Workout Details */}
             <div className="flex items-center gap-4 w-full lg:flex-1 min-w-0 bg-[#252A33] rounded-xl p-3 sm:p-4">
@@ -59,12 +59,11 @@ const SavedCard = ({ plan }) => {
 
                 <SavedWorkoutDetailsButton fitnessId = {plan.id}></SavedWorkoutDetailsButton>
 
-                <button className="btn bg-[#C2F800] border-[#C2F800] text-black hover:bg-[#D4FF24] hover:border-[#D4FF24] h-10 min-h-10 px-3 sm:px-4 flex items-center gap-2 text-xs sm:text-sm font-bold normal-case whitespace-nowrap shrink-0 transition-all duration-300">
-                    <MdOutlineDone className="text-lg shrink-0" />
-                    Mark as Done
-                </button>
+                
 
-                <button className="btn btn-ghost text-gray-400 hover:bg-red-500/10 hover:text-red-400 h-10 min-h-10 w-10 min-w-10 p-0 rounded-full shrink-0 transition-all duration-300">
+                <button 
+                onClick={() => handleSaveRemoveWorkout(plan.id)}
+                className="btn btn-ghost text-gray-400 hover:bg-red-500/10 hover:text-red-400 h-10 min-h-10 w-10 min-w-10 p-0 rounded-full shrink-0 transition-all duration-300">
                     <RxCross2 className="text-xl" />
                 </button>
 

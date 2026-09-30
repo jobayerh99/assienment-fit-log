@@ -7,11 +7,11 @@ import { MdOutlineDone } from 'react-icons/md';
 import { RxCross2 } from 'react-icons/rx';
 import ViewWorkoutDetailsbutton from '../fitness-details/ViewWorkoutDetailsbutton';
 
-const MyPlanCard = ({ plan }) => {
+const MyPlanCard = ({ plan, handlePlanRemoveWorkout, handleMarkAsDoneWorkout }) => {
 
     
     return (
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 p-4 rounded-xl bg-[#1C1F26] shadow-md hover:shadow-lg transition-all duration-300">
+        <div className="flex flex-col lg:flex-row justify-between items-center m-2 gap-4 p-4 rounded-xl bg-[#1C1F26] shadow-md hover:shadow-lg transition-all duration-300">
 
             {/* Unified section for image + details */}
             <div className="flex items-center gap-4 w-full lg:w-3/4 bg-[#252A33] rounded-xl p-4 border-r-0">
@@ -49,11 +49,13 @@ const MyPlanCard = ({ plan }) => {
             {/* Buttons section with same background */}
             <div className="flex flex-wrap gap-3 items-center justify-center lg:justify-end w-full lg:w-auto bg-[#252A33] rounded-xl p-4">
                 <ViewWorkoutDetailsbutton fitnessId = {plan.id}></ViewWorkoutDetailsbutton>
-                <button className="btn btn-success flex items-center gap-2 px-4">
+                <button 
+                onClick={() =>handleMarkAsDoneWorkout(plan.id)}
+                className="btn btn-success flex items-center gap-2 px-4">
                     <MdOutlineDone /> Mark as Done
                 </button>
 
-                <span>
+                <span onClick={() => handlePlanRemoveWorkout(plan.id)}>
                     <RxCross2 />
                 </span>
 
